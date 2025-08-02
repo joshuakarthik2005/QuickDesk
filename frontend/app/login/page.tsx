@@ -12,7 +12,7 @@ import { useAuth } from "@/contexts/auth-context"
 
 export default function LoginPage() {
   const router = useRouter()
-  const { login, isLoading } = useAuth()
+  const { login, isLoading, user } = useAuth()
   const [formData, setFormData] = useState({
     email: "",
     password: ""
@@ -24,9 +24,19 @@ export default function LoginPage() {
     e.preventDefault()
     setError("")
     
-    const success = await login(formData.email, formData.password)
-    if (success) {
-      router.push("/")
+    const userData = await login(formData.email, formData.password)
+    if (userData) {
+      // Redirect based on user role
+      if (userData.role === "agent") {
+        router.push("/agent")
+      } else if (userData.role === "admin") {
+        router.push("/admin")
+      } else if (userData.role === "customer") {
+        router.push("/customer")
+      } else {
+        // Fallback to home page
+        router.push("/")
+      }
     } else {
       setError("Invalid username or password")
     }

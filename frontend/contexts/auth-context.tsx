@@ -22,7 +22,7 @@ interface User {
 
 interface AuthContextType {
   user: User | null
-  login: (username: string, password: string) => Promise<boolean>
+  login: (username: string, password: string) => Promise<User | null>
   logout: () => Promise<void>
   register: (userData: any) => Promise<boolean>
   updateProfile: (profileData: any) => Promise<boolean>
@@ -54,20 +54,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
-  const login = async (username: string, password: string): Promise<boolean> => {
+  const login = async (username: string, password: string): Promise<User | null> => {
     setIsLoading(true)
     setError(null)
     try {
       const response = await api.login(username, password)
       if (response.user) {
         setUser(response.user)
-        return true
+        return response.user
       }
-      return false
+      return null
     } catch (error: any) {
       console.error("Login error:", error)
       setError(error.message || "Login failed")
-      return false
+      return null
     } finally {
       setIsLoading(false)
     }
