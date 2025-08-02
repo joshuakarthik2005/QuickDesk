@@ -290,16 +290,15 @@ export default function SignUpPage() {
               </div>
 
               {/* Terms and Conditions */}
-              <div className="flex items-start space-x-3">
+              <div className="flex items-start space-x-2">
                 <input 
-                  id="accept-terms"
                   type="checkbox" 
                   checked={acceptTerms}
                   onChange={(e) => setAcceptTerms(e.target.checked)}
-                  className="mt-1 w-5 h-5 text-[#f9d423] bg-white/10 border-white/30 rounded focus:ring-[#f9d423] focus:ring-2 focus:bg-[#f9d423] checked:bg-[#f9d423] checked:border-[#f9d423]" 
+                  className="mt-1 rounded bg-white/10 border-white/20" 
                   required
                 />
-                <label htmlFor="accept-terms" className="text-sm text-white cursor-pointer">
+                <label className="text-sm text-white">
                   I agree to the{" "}
                   <Link href="/terms" className="text-[#f9d423] hover:underline">
                     Terms of Service

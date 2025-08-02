@@ -93,16 +93,29 @@ export default function AgentDashboard() {
   const loadDashboardData = async () => {
     setLoading(true)
     try {
-      const [dashboardData, allTickets] = await Promise.all([
-        api.getDashboardStats(),
-        api.getTickets(new URLSearchParams({ 
-          ordering: '-priority__level,-created_at',
-          page_size: '50'
-        }))
-      ])
+      // Get all tickets using the same API as ticket queue
+      const response = await api.getTickets(new URLSearchParams({ 
+        ordering: '-priority__level,-created_at',
+        page_size: '50'
+      }))
       
-      setStats(dashboardData)
-      setTickets(allTickets.results || allTickets)
+      const allTickets = response.results || response
+      setTickets(allTickets)
+      
+      // Calculate stats from the tickets data
+      const totalTickets = allTickets.length
+      const assignedTickets = allTickets.filter((t: TicketSummary) => t.assigned_to_username).length
+      const inProgressTickets = allTickets.filter((t: TicketSummary) => t.status === 'in_progress').length
+      const resolvedTickets = allTickets.filter((t: TicketSummary) => t.status === 'resolved').length
+      const unassignedTickets = allTickets.filter((t: TicketSummary) => !t.assigned_to_username).length
+      
+      setStats({
+        total_tickets: totalTickets,
+        assigned_tickets: assignedTickets,
+        in_progress_tickets: inProgressTickets,
+        resolved_tickets: resolvedTickets,
+        unassigned_tickets: unassignedTickets
+      })
     } catch (error) {
       console.error("Failed to load dashboard data:", error)
     } finally {
