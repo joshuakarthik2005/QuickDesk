@@ -296,7 +296,7 @@ export default function SignUpPage() {
                   type="checkbox" 
                   checked={acceptTerms}
                   onChange={(e) => setAcceptTerms(e.target.checked)}
-                  className="mt-1 w-4 h-4 text-[#f9d423] bg-white/10 border-white/30 rounded focus:ring-[#f9d423] focus:ring-2 focus:bg-[#f9d423] checked:bg-[#f9d423] checked:border-[#f9d423]" 
+                  className="mt-1 w-5 h-5 text-[#f9d423] bg-white/10 border-white/30 rounded focus:ring-[#f9d423] focus:ring-2 focus:bg-[#f9d423] checked:bg-[#f9d423] checked:border-[#f9d423]" 
                   required
                 />
                 <label htmlFor="accept-terms" className="text-sm text-white cursor-pointer">

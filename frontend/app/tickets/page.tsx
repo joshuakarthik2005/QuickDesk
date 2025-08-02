@@ -203,12 +203,14 @@ export default function TicketsPage() {
               View and manage your support tickets
             </p>
           </div>
-          <Link href="/tickets/new">
-            <Button className="bg-white text-[#ff4e50] hover:bg-white/90 font-semibold">
-              <Plus className="h-4 w-4 mr-2" />
-              Create Ticket
-            </Button>
-          </Link>
+          {user.role === "customer" && (
+            <Link href="/tickets/new">
+              <Button className="bg-white text-[#ff4e50] hover:bg-white/90 font-semibold">
+                <Plus className="h-4 w-4 mr-2" />
+                Create Ticket
+              </Button>
+            </Link>
+          )}
         </div>
 
         {/* Filters */}
@@ -389,12 +391,14 @@ export default function TicketsPage() {
           <Card className="backdrop-blur-md bg-[#0f2027]/80 border-white/20 shadow-xl">
             <CardContent className="py-12 text-center">
               <p className="text-white/70 mb-4">No tickets found</p>
-              <Link href="/tickets/new">
-                <Button className="bg-white text-[#ff4e50] hover:bg-white/90 font-semibold">
-                  <Plus className="h-4 w-4 mr-2" />
-                  Create your first ticket
-                </Button>
-              </Link>
+              {user.role === "customer" && (
+                <Link href="/tickets/new">
+                  <Button className="bg-white text-[#ff4e50] hover:bg-white/90 font-semibold">
+                    <Plus className="h-4 w-4 mr-2" />
+                    Create your first ticket
+                  </Button>
+                </Link>
+              )}
             </CardContent>
           </Card>
         )}
