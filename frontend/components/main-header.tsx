@@ -53,12 +53,28 @@ export function MainHeader() {
 
   const navigation = getNavigationForRole()
 
+  // Get appropriate home URL based on user role
+  const getHomeUrl = () => {
+    if (!user) return "/"
+    
+    switch (user.role) {
+      case "agent":
+        return "/agent"
+      case "admin":
+        return "/admin"
+      case "customer":
+        return "/customer"
+      default:
+        return "/"
+    }
+  }
+
   return (
     <header className="sticky top-0 z-50 w-full navbar-3d backdrop-blur-md bg-[#0f2027]/95 border-b border-white/20">
       <div className="container flex h-16 items-center">
         {/* Logo */}
         <div className="mr-8">
-          <Link href="/" className="flex items-center space-x-2 group">
+          <Link href={getHomeUrl()} className="flex items-center space-x-2 group">
             <HelpCircle className="h-8 w-8 text-[#f9d423] transition-transform group-hover:scale-110 group-hover:rotate-12" />
             <span className="text-xl font-bold text-white drop-shadow-lg">QuickDesk</span>
           </Link>
