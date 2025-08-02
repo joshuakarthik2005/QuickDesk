@@ -149,31 +149,7 @@ export default function LoginPage() {
           </p>
         </div>
 
-        {/* Demo Credentials */}
-        <Card className="card-3d backdrop-blur-md bg-[#0f2027]/60 border-white/20 glass-3d slide-in-3d" style={{animationDelay: '0.4s'}}>
-          <CardContent className="pt-6">
-            <div className="text-center space-y-3">
-              <p className="text-sm font-medium text-white">Demo Credentials</p>
-              <div className="text-xs text-white/60 space-y-2">
-                <div className="border border-white/20 rounded p-2 bg-white/5 card-3d hover:bg-white/10 transition-all">
-                  <p className="font-medium text-white">Customer:</p>
-                  <p>Username: customer</p>
-                  <p>Password: password</p>
-                </div>
-                <div className="border border-white/20 rounded p-2 bg-white/5 card-3d hover:bg-white/10 transition-all">
-                  <p className="font-medium text-white">Agent:</p>
-                  <p>Username: agent</p>
-                  <p>Password: password</p>
-                </div>
-                <div className="border border-white/20 rounded p-2 bg-white/5 card-3d hover:bg-white/10 transition-all">
-                  <p className="font-medium text-white">Admin:</p>
-                  <p>Username: admin</p>
-                  <p>Password: password</p>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+        
       </div>
     </div>
   )
