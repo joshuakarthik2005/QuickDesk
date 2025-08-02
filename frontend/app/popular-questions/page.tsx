@@ -10,7 +10,6 @@ import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { AuthGuard } from "@/components/auth-guard"
 import { MainHeader } from "@/components/main-header"
-import { useAuth } from "@/contexts/auth-context"
 
 const mockQuestions = [
   {
@@ -107,7 +106,6 @@ const categories = [
 ]
 
 export default function PopularQuestionsPage() {
-  const { user } = useAuth()
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("All Categories")
   const [expandedQuestion, setExpandedQuestion] = useState<number | null>(null)
@@ -144,12 +142,8 @@ export default function PopularQuestionsPage() {
               <h1 className="text-4xl font-bold text-white">Popular Questions</h1>
             </div>
             <p className="text-white/90 text-lg max-w-2xl mx-auto">
-              Find quick answers to the most frequently asked questions.{user?.role === "customer" && (
-                <>
-                  {" "}Can't find what you're looking for? 
-                  <Link href="/tickets/new" className="text-[#f9d423] hover:underline ml-1">Create a new ticket</Link>
-                </>
-              )}
+              Find quick answers to the most frequently asked questions. Can't find what you're looking for? 
+              <Link href="/tickets/new" className="text-[#f9d423] hover:underline ml-1">Create a new ticket</Link>
             </p>
           </div>
 
@@ -269,17 +263,15 @@ export default function PopularQuestionsPage() {
                                 </Button>
                               </div>
                             </div>
-                            {user?.role === "customer" && (
-                              <Link href="/tickets/new">
-                                <Button 
-                                  variant="outline" 
-                                  size="sm"
-                                  className="bg-white/10 border-white/20 text-white hover:bg-white/20"
-                                >
-                                  Still need help?
-                                </Button>
-                              </Link>
-                            )}
+                            <Link href="/tickets/new">
+                              <Button 
+                                variant="outline" 
+                                size="sm"
+                                className="bg-white/10 border-white/20 text-white hover:bg-white/20"
+                              >
+                                Still need help?
+                              </Button>
+                            </Link>
                           </div>
                         </div>
                       )}
@@ -295,22 +287,17 @@ export default function PopularQuestionsPage() {
             <CardContent className="p-6 text-center">
               <h3 className="text-lg font-semibold text-white mb-2">Can't find what you're looking for?</h3>
               <p className="text-white/70 mb-4">
-                {user?.role === "customer" 
-                  ? "Our support team is here to help! Create a ticket and we'll get back to you as soon as possible."
-                  : "Browse through the questions above or check existing tickets for solutions."
-                }
+                Our support team is here to help! Create a ticket and we'll get back to you as soon as possible.
               </p>
               <div className="flex justify-center space-x-3">
-                {user?.role === "customer" && (
-                  <Link href="/tickets/new">
-                    <Button className="bg-white text-[#ff4e50] hover:bg-white/90 font-semibold">
-                      Create New Ticket
-                    </Button>
-                  </Link>
-                )}
+                <Link href="/tickets/new">
+                  <Button className="bg-white text-[#ff4e50] hover:bg-white/90 font-semibold">
+                    Create New Ticket
+                  </Button>
+                </Link>
                 <Link href="/tickets">
                   <Button variant="outline" className="bg-white/10 border-white/20 text-white hover:bg-white/20">
-                    View {user?.role === "customer" ? "My" : "All"} Tickets
+                    View My Tickets
                   </Button>
                 </Link>
               </div>
